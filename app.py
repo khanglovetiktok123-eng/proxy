@@ -97,14 +97,14 @@ def get_random_color():
 # ================== DISCORD COMMANDS ==================
 @tree.command(name="status", description="Kiểm tra trạng thái bot")
 async def status(interaction: discord.Interaction):
-    st = "🟢 Online" if online_writer else "🔴 Connecting"
+    st = "🟢 Online" if conn_state.connected else "🔴 Connecting"
     await interaction.response.send_message(
         f"**🤖 Free Fire Bot Status**\n\n"
         f"**Trạng thái:** {st}\n"
-        f"**Tên Account:** `{acc_name}`\n"
-        f"**Bot UID:** `{BOT_UID}`\n"
+        f"**Tên Account:** `{bot_khangios}`\n"
+        f"**Bot UID:** `{15900821779}`\n"
         f"**Target UID:** `{TarGeT}`\n"
-        f"**Region:** `{region}`"
+        f"**Region:** `{VN}`"
     )
 
 @tree.command(name="5", description="Mời 5 người")
