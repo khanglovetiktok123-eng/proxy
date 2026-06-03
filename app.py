@@ -24,7 +24,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
-# Encrypted Credit Info
+# Encrypted Credit Info - DO NOT REMOVE
 _Xk9mN3pL5vR8wQ2 = "e3tZWV1bR0dDWVlbWVhYWFlYWF1cW1tbX19fXFxZWkdHQ1lZW1lYWFhZWFldXFtbWV1ZXFxaWkdHQ1lZW1lb"
 _Yt4jH7qW2sD6fB1 = "WFhYWkdGRFlYV1laR0Q="
 _Zc8vN5mL4pR7wS3 = "WFdZWkdEWVhXWVpHRA=="
@@ -55,14 +55,13 @@ spam_uid = None
 Spy = False
 Chat_Leave = False
 BOT_UID = 15900821779
-bot_khangios = "bot_khangios"
 key = None
 iv = None
 region = "VN"
 TarGeT = None
 acc_name = "bot_khangios"
 
-# ================== FLASK ==================
+# ================== FLASK API ==================
 app = Flask(__name__)
 
 Hr = {
@@ -76,7 +75,17 @@ Hr = {
     'ReleaseVersion': "OB53"}
 
 def get_random_color():
-    colors = ["[FF0000]", "[00FF00]", "[0000FF]", "[FFFF00]", "[FF00FF]", "[00FFFF]", "[FFFFFF]", "[FFA500]"]
+    colors = [
+        "[FF0000]", "[00FF00]", "[0000FF]", "[FFFF00]", "[FF00FF]", "[00FFFF]", "[FFFFFF]", "[FFA500]",
+        "[A52A2A]", "[800080]", "[000000]", "[808080]", "[C0C0C0]", "[FFC0CB]", "[FFD700]", "[ADD8E6]",
+        "[90EE90]", "[D2691E]", "[DC143C]", "[00CED1]", "[9400D3]", "[F08080]", "[20B2AA]", "[FF1493]",
+        "[7CFC00]", "[B22222]", "[FF4500]", "[DAA520]", "[00BFFF]", "[00FF7F]", "[4682B4]", "[6495ED]",
+        "[5F9EA0]", "[DDA0DD]", "[E6E6FA]", "[B0C4DE]", "[556B2F]", "[8FBC8F]", "[2E8B57]", "[3CB371]",
+        "[6B8E23]", "[808000]", "[B8860B]", "[CD5C5C]", "[8B0000]", "[FF6347]", "[FF8C00]", "[BDB76B]",
+        "[9932CC]", "[8A2BE2]", "[4B0082]", "[6A5ACD]", "[7B68EE]", "[4169E1]", "[1E90FF]", "[191970]",
+        "[00008B]", "[000080]", "[008080]", "[008B8B]", "[B0E0E6]", "[AFEEEE]", "[E0FFFF]", "[F5F5DC]",
+        "[FAEBD7]"
+    ]
     return random.choice(colors)
 
 # ================== DISCORD COMMANDS ==================
@@ -86,9 +95,9 @@ async def status(interaction: discord.Interaction):
     await interaction.response.send_message(
         f"**🤖 Free Fire Bot Status**\n\n"
         f"**Trạng thái:** {st}\n"
-        f"**Tên:** `{acc_name}`\n"
+        f"**Tên Account:** `{acc_name}`\n"
         f"**Bot UID:** `{BOT_UID}`\n"
-        f"**Target:** `{TarGeT}`\n"
+        f"**Target UID:** `{TarGeT}`\n"
         f"**Region:** `{region}`"
     )
 
@@ -98,7 +107,7 @@ async def invite5(interaction: discord.Interaction, uid: str):
     await interaction.response.defer()
     try:
         await perform_invite_5(int(uid))
-        await interaction.followup.send(f"✅ Đã gửi mời 5 người đến `{uid}`")
+        await interaction.followup.send(f"✅ **Đã gửi lời mời 5 người** đến `{uid}`")
     except Exception as e:
         await interaction.followup.send(f"❌ Lỗi: {str(e)}")
 
@@ -108,53 +117,95 @@ async def invite6(interaction: discord.Interaction, uid: str):
     await interaction.response.defer()
     try:
         await perform_invite_6(int(uid))
-        await interaction.followup.send(f"✅ Đã gửi mời 6 người đến `{uid}`")
+        await interaction.followup.send(f"✅ **Đã gửi lời mời 6 người** đến `{uid}`")
     except Exception as e:
         await interaction.followup.send(f"❌ Lỗi: {str(e)}")
 
 @tree.command(name="help", description="Danh sách lệnh")
 async def help_cmd(interaction: discord.Interaction):
-    await interaction.response.send_message("**Lệnh:**\n`/status`\n`/5 <uid>`\n`/6 <uid>`")
+    await interaction.response.send_message(
+        "**📋 Lệnh Bot Free Fire**\n\n"
+        "`/status` - Kiểm tra trạng thái\n"
+        "`/5 <uid>` - Mời 5 người\n"
+        "`/6 <uid>` - Mời 6 người\n"
+        "`/help` - Xem lệnh"
+    )
 
-# ================== INVITE FUNCTIONS ==================
+# ================== CORE FUNCTIONS ==================
+async def encrypted_proto(encoded_hex):
+    key = b'Yg&tc%DEuh6%Zc^8'
+    iv = b'6oyZDr22E3ychjM%'
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    padded_message = pad(encoded_hex, AES.block_size)
+    encrypted_payload = cipher.encrypt(padded_message)
+    return encrypted_payload
+
+async def GeNeRaTeAccEss(uid , password):
+    url = "https://100067.connect.garena.com/oauth/guest/token/grant"
+    headers = {
+        "Host": "100067.connect.garena.com",
+        "User-Agent": (await Ua()),
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "close"}
+    data = {
+        "uid": uid,
+        "password": password,
+        "response_type": "token",
+        "client_type": "2",
+        "client_secret": "2ee44819e9b4598845141067b281621874d0d5d7af9d8f7e00c1e54715b7d1e3",
+        "client_id": "100067"}
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, headers=Hr, data=data) as response:
+            if response.status != 200: return None, None
+            data = await response.json()
+            open_id = data.get("open_id")
+            access_token = data.get("access_token")
+            return (open_id, access_token) if open_id and access_token else (None, None)
+
+# ================== FLASK & RUN ==================
+def run_flask():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
+
 async def perform_invite_5(target_uid: int):
     global online_writer, key, iv, region, BOT_UID
-    if not online_writer: raise Exception("Bot chưa kết nối")
+    if not online_writer:
+        raise Exception("Bot chưa kết nối!")
     try:
         PAc = await OpEnSq(key, iv, region)
         await SEndPacKeT(None, online_writer, 'OnLine', PAc)
+        await asyncio.sleep(0.5)
         C = await cHSq(5, target_uid, key, iv, region)
         await SEndPacKeT(None, online_writer, 'OnLine', C)
+        await asyncio.sleep(0.5)
         V = await SEnd_InV(5, target_uid, key, iv, region)
         await SEndPacKeT(None, online_writer, 'OnLine', V)
         await asyncio.sleep(5)
         E = await ExiT(BOT_UID, key, iv)
         await SEndPacKeT(None, online_writer, 'OnLine', E)
     except Exception as e:
-        print(f"Lỗi 5: {e}")
+        print(f"Lỗi invite 5: {e}")
 
 async def perform_invite_6(target_uid: int):
     global online_writer, key, iv, region, BOT_UID
-    if not online_writer: raise Exception("Bot chưa kết nối")
+    if not online_writer:
+        raise Exception("Bot chưa kết nối!")
     try:
         PAc = await OpEnSq(key, iv, region)
         await SEndPacKeT(None, online_writer, 'OnLine', PAc)
+        await asyncio.sleep(0.5)
         C = await cHSq(6, target_uid, key, iv, region)
         await SEndPacKeT(None, online_writer, 'OnLine', C)
+        await asyncio.sleep(0.5)
         V = await SEnd_InV(6, target_uid, key, iv, region)
         await SEndPacKeT(None, online_writer, 'OnLine', V)
         await asyncio.sleep(5)
         E = await ExiT(BOT_UID, key, iv)
         await SEndPacKeT(None, online_writer, 'OnLine', E)
     except Exception as e:
-        print(f"Lỗi 6: {e}")
+        print(f"Lỗi invite 6: {e}")
 
-# ================== FLASK ==================
-def run_flask():
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
-
-# ================== MAIN BOT ==================
 async def MaiiiinE():
     global key, iv, region, TarGeT, acc_name, online_writer, loop
 
@@ -199,7 +250,7 @@ async def MaiiiinE():
     task2 = asyncio.create_task(TcPOnLine(OnLineiP, OnLineporT, key, iv, AutHToKen))
 
     loop = asyncio.get_running_loop()
-    print(f"✅ Bot Online | Name: {acc_name}")
+    print(f"✅ Bot Discord Online | Name: {acc_name} | Target: {TarGeT}")
 
     await asyncio.gather(task1, task2)
 
@@ -213,17 +264,22 @@ async def StarTinG():
 
 @client.event
 async def on_ready():
-    await tree.sync()
-    print(f"🤖 Discord Bot Ready: {client.user}")
+    try:
+        await tree.sync()
+        print(f"🤖 Discord Bot Ready: {client.user}")
+    except Exception as e:
+        print(f"Lỗi sync: {e}")
 
 async def main():
     threading.Thread(target=run_flask, daemon=True).start()
+
     token = os.getenv("DISCORD_TOKEN")
     if not token:
         print("❌ Thiếu DISCORD_TOKEN!")
         return
+
     await asyncio.gather(StarTinG(), client.start(token))
 
 if __name__ == '__main__':
-    print("🚀 Starting Free Fire Discord Bot...")
+    print("🚀 Khởi động Free Fire Discord Bot...")
     asyncio.run(main())
