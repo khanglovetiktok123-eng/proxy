@@ -3,10 +3,10 @@ requests
 protobuf
 protobuf-decoder
 aiohttp
-pyjwt
-pytz
-psutil
-cfonts
 pycryptodome
 urllib3
-discord.py
+discord.py>=2.3.0
+cfonts
+psutil
+pytz
+pyjwt
