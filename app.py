@@ -5,6 +5,7 @@ import urllib3
 import random
 import json
 import base64
+import aiohttp
 
 import discord
 from discord import app_commands
