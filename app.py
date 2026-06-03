@@ -1,3 +1,5 @@
+import discord
+from discord.ext import commands
 import requests , os , psutil , sys , jwt , pickle , json , binascii , time , urllib3 , base64 , datetime , re , socket , threading , ssl , pytz , aiohttp
 from flask import Flask, request, jsonify
 from protobuf_decoder.protobuf_decoder import Parser
@@ -9,7 +11,7 @@ from threading import Thread
 from Pb2 import DEcwHisPErMsG_pb2 , MajoRLoGinrEs_pb2 , PorTs_pb2 , MajoRLoGinrEq_pb2 , sQ_pb2 , Team_msg_pb2
 from cfonts import render, say
 import asyncio
-import random
+import random 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
 
