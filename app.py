@@ -14,8 +14,7 @@ import random
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
 
 # DISCORD SETUP 
-TELEGRAM_BOT_TOKEN = " Thay token bot tellle"  # BotFather থেকে নেওয়া টোকেন দিন
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
+TOKEN = "YOUR_DISCORD_BOT_TOKEN"
 
 # Encrypted Credit Info - DO NOT REMOVE
 _Xk9mN3pL5vR8wQ2 = "e3tZWV1bR0dDWVlbWVhYWFlYWF1cW1tbX19fXFxZWkdHQ1lZW1lYWFhZWFldXFtbWV1ZXFxaWkdHQ1lZW1lb"
@@ -57,7 +56,7 @@ Chat_Leave = False
 BOT_UID = 15900821779
 key = None
 iv = None
-region = None
+region = VN
 TarGeT = None
 acc_name = bot_khangios
 #------------------------------------------#
@@ -135,19 +134,19 @@ async def process_telegram_command(update):
                 await send_telegram_message(chat_id, f"<b>🤖 Bot Status</b>\n\n"
                                                      f"Status: {status}\n"
                                                      f"Target UID: {TarGeT}\n"
-                                                     f"Bot Name: {acc_name}\n"
-                                                     f"Region: {region}\n"
-                                                     f"Bot UID: {BOT_UID}")
+                                                     f"Bot Name: {bot_khangios}\n"
+                                                     f"Region: {VN}\n"
+                                                     f"Bot UID: {15900821779}")
             
             elif data == "invite_5":
                 await send_telegram_message(chat_id, "<b>5️⃣ Player Invite</b>\n\n"
                                                      "Send UID using:\n"
-                                                     "<code>/5 UID</code>")
+                                                     "<code>!5 UID</code>")
             
             elif data == "invite_6":
                 await send_telegram_message(chat_id, "<b>6️⃣ Player Invite</b>\n\n"
                                                      "Send UID using:\n"
-                                                     "<code>/6 UID</code>")
+                                                     "<code>!6 UID</code>")
             
             elif data == "menu":
                 await send_main_menu(chat_id)
@@ -168,14 +167,14 @@ async def process_telegram_command(update):
         await send_telegram_message(chat_id, f"<b>🤖 Bot Status</b>\n\n"
                                              f"Status: {status}\n"
                                              f"Target UID: {TarGeT}\n"
-                                             f"Bot Name: {acc_name}\n"
-                                             f"Region: {region}\n"
-                                             f"Bot UID: {BOT_UID}")
+                                             f"Bot Name: {bot_khangios}\n"
+                                             f"Region: {VN}\n"
+                                             f"Bot UID: {15900821779}")
     
     elif text.startswith("/5"):
         parts = text.split()
         if len(parts) < 2:
-            await send_telegram_message(chat_id, "❌ <b>Usage:</b> <code>/5 UID</code>")
+            await send_telegram_message(chat_id, "❌ <b>Usage:</b> <code>!5 UID</code>")
             return
         
         target_uid = parts[1]
@@ -199,7 +198,7 @@ async def process_telegram_command(update):
     elif text.startswith("/6"):
         parts = text.split()
         if len(parts) < 2:
-            await send_telegram_message(chat_id, "❌ <b>Usage:</b> <code>/6 UID</code>")
+            await send_telegram_message(chat_id, "❌ <b>Usage:</b> <code>!6 UID</code>")
             return
         
         target_uid = parts[1]
@@ -222,11 +221,11 @@ async def process_telegram_command(update):
     
     elif text.startswith("/help"):
         await send_telegram_message(chat_id, "<b>📚 Available Commands:</b>\n\n"
-                                             "/start - Show Main Menu\n"
-                                             "/status - Check Bot Status\n"
-                                             "/5 UID - Send 5-Player Invite\n"
-                                             "/6 UID - Send 6-Player Invite\n"
-                                             "/help - Show This Help")
+                                             "!start - Show Main Menu\n"
+                                             "!status - Check Bot Status\n"
+                                             "!5 UID - Send 5-Player Invite\n"
+                                             "!6 UID - Send 6-Player Invite\n"
+                                             "!help - Show This Help")
 
 async def send_main_menu(chat_id):
     """মেইন মেনু পাঠানোর ফাংশন"""
@@ -236,11 +235,11 @@ async def send_main_menu(chat_id):
         f"Target: {TarGeT}\n"
         f"Status: {'🟢 Online' if online_writer else '🔴 Connecting'}\n\n"
         f"<b>📚 Available Commands:</b>\n\n"
-        f"/start - Show Main Menu\n"
-        f"/status - Check Bot Status\n"
-        f"/5 UID - Send 5-Player Invite\n"
-        f"/6 UID - Send 6-Player Invite\n"
-        f"/help - Show This Help")
+        f"!start - Show Main Menu\n"
+        f"!status - Check Bot Status\n"
+        f"!/5 UID - Send 5-Player Invite\n"
+        f"!6 UID - Send 6-Player Invite\n"
+        f"!help - Show This Help")
 
 async def answer_callback(callback_id):
     """কলব্যাকের জবাব দেয়া"""
@@ -550,7 +549,7 @@ async def perform_invite_5(target_uid: int):
         
         # Exit Squad after delay
         await asyncio.sleep(5)
-        E = await ExiT(BOT_UID, key, iv)
+        E = await ExiT(15900821779, key, iv)
         await SEndPacKeT(None, online_writer, 'OnLine', E)
         
         return {"status": "success", "message": f"5-Player invite sent to {target_uid}"}
@@ -581,7 +580,7 @@ async def perform_invite_6(target_uid: int):
         
         # Exit Squad after delay
         await asyncio.sleep(5)
-        E = await ExiT(BOT_UID, key, iv)
+        E = await ExiT(15900821779, key, iv)
         await SEndPacKeT(None, online_writer, 'OnLine', E)
         
         return {"status": "success", "message": f"6-Player invite sent to {target_uid}"}
@@ -589,7 +588,7 @@ async def perform_invite_6(target_uid: int):
     except Exception as e:
         raise Exception(f"Failed to send 6-player invite: {str(e)}")
 
-@app.route('/5')
+@app.route('!5')
 def invite_5_player():
     global loop
     target_uid_str = request.args.get('uid')
@@ -612,7 +611,7 @@ def invite_5_player():
         "message": "5-Player Invite Sent!"
     })
 
-@app.route('/6')
+@app.route('!6')
 def invite_6_player():
     global loop
     target_uid_str = request.args.get('uid')
@@ -717,7 +716,7 @@ async def MaiiiinE():
 
     os.system('clear')
     print(render('DEV', colors=['white', 'green'], align='center'))
-    print(f"\n - BoT STarTinG And OnLine on TarGet : {TarGeT} | BOT NAME : {acc_name}")
+    print(f"\n - BoT STarTinG And OnLine on TarGet : {TarGeT} | BOT NAME : {bot_khangios}")
     print(" - BoT sTaTus > GooD | OnLinE ! (: \n")
     print(" - API Routes: /5?uid=UID  |  /6?uid=UID")
     print(" - Telegram Bot: Active!")
