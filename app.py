@@ -61,7 +61,12 @@ iv = None
 region = "VN"
 TarGeT = None
 acc_name = "bot_khangios"
+# ================== CONNECTION FIX ==================
+class ConnectionState:
+    writer = None
+    connected = False
 
+conn_state = ConnectionState()
 # ================== FLASK API ==================
 app = Flask(__name__)
 
