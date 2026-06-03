@@ -13,7 +13,7 @@ import random
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
 
-# TELEGRAM BOT SETUP
+# DISCORD SETUP 
 TELEGRAM_BOT_TOKEN = " Thay token bot tellle"  # BotFather থেকে নেওয়া টোকেন দিন
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
@@ -54,12 +54,12 @@ spam_chat_id = None
 spam_uid = None
 Spy = False
 Chat_Leave = False
-BOT_UID = None
+BOT_UID = 15900821779
 key = None
 iv = None
 region = None
 TarGeT = None
-acc_name = None
+acc_name = bot_khangios
 #------------------------------------------#
 
 app = Flask(__name__)
@@ -232,7 +232,7 @@ async def send_main_menu(chat_id):
     """মেইন মেনু পাঠানোর ফাংশন"""
     await send_telegram_message(chat_id, 
         f"<b>🤖 Bot By Mafu - Control Panel</b>\n\n"
-        f"Bot Name: {acc_name}\n"
+        f"Bot Name: {bot_khangios}\n"
         f"Target: {TarGeT}\n"
         f"Status: {'🟢 Online' if online_writer else '🔴 Connecting'}\n\n"
         f"<b>📚 Available Commands:</b>\n\n"
