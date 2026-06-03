@@ -1,6 +1,6 @@
 flask
 requests
-protobuf
+protobuf 
 protobuf-decoder
 aiohttp
 pycryptodome
