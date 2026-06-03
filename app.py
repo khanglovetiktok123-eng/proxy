@@ -54,11 +54,12 @@ spam_uid = None
 Spy = False
 Chat_Leave = False
 BOT_UID = 15900821779
+bot_khangios = "bot_khangios"
 key = None
 iv = None
-region = VN
+region = "VN"
 TarGeT = None
-acc_name = bot_khangios
+acc_name = "bot_khangios"
 #------------------------------------------#
 
 app = Flask(__name__)
