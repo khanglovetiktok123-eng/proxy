@@ -16,7 +16,7 @@ import random
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
 
 # DISCORD SETUP 
-TOKEN = "YOUR_DISCORD_BOT_TOKEN"
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 # Encrypted Credit Info - DO NOT REMOVE
 _Xk9mN3pL5vR8wQ2 = "e3tZWV1bR0dDWVlbWVhYWFlYWF1cW1tbX19fXFxZWkdHQ1lZW1lYWFhZWFldXFtbWV1ZXFxaWkdHQ1lZW1lb"
